@@ -13,6 +13,30 @@ class Node{
 
 public class LinkedList {
 
+    public  static Node deleteKthNode(Node head, int k){
+        if(head == null){
+            return null;
+        }
+        if(k == 1){
+            head = head.next;
+        }
+        Node temp =  head;
+
+            for(int i=0; i<k-2; i++){
+                if(temp.next == null){
+                    System.out.println("Please enter a valid k");
+                    return head;
+                }
+                temp = temp.next;
+            }
+
+
+        if (temp.next != null) {
+            temp.next = temp.next.next;
+        }
+        return head;
+    }
+
     public static Node deleteHead(Node head){
 
         if(head == null){
@@ -95,7 +119,7 @@ public class LinkedList {
 //        System.out.println(p.data);
 //        System.out.println(p.next);
 
-        int[] arr = {8,5,4};
+        int[] arr = {8,5,4,24,89,6,4,67,8};
 
         Node head = convertArrayToLL(arr);
 //        System.out.println(head.data);
@@ -110,10 +134,11 @@ public class LinkedList {
 
        // head = deleteHead(head);
 
-        head = deleteTail(head);
+        //head = deleteTail(head);
 
-        System.out.println(head.next.data);
 
+        head = deleteKthNode(head,18);
+        transverse(head);
 
     }
 }
