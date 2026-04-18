@@ -13,6 +13,21 @@ class Node{
 
 public class LinkedList {
 
+    public static   Node insertAtFirst(Node head ,int val){
+
+        Node new_Node = new Node(val);
+
+        if(head == null){
+            return new_Node;
+        }
+
+        new_Node.next = head;
+
+        head = new_Node;
+
+        return head;
+    }
+
     public  static Node deleteKthNode(Node head, int k){
         if(head == null){
             return null;
@@ -137,7 +152,9 @@ public class LinkedList {
         //head = deleteTail(head);
 
 
-        head = deleteKthNode(head,18);
+       // head = deleteKthNode(head,18);
+
+        head = insertAtFirst(head,79);
         transverse(head);
 
     }
