@@ -28,6 +28,31 @@ public class LinkedList {
         return head;
     }
 
+    public static Node insertAtKthNode(Node head , int k, int val){
+
+        Node new_Node = new Node(val);
+
+        if (k <= 0) {
+            System.out.println("Invalid position");
+            return head;
+        }
+        if (k == 1) {
+            new_Node.next = head;
+            return new_Node;
+        }
+        Node temp = head;
+        for(int i=1; i<k-1  && temp != null; i++){
+          temp = temp.next;
+        }
+
+        if (temp == null) return head;
+
+        new_Node.next = temp.next;
+        temp.next =new_Node;
+
+        return head;
+    }
+
     public  static Node deleteKthNode(Node head, int k){
         if(head == null){
             return null;
@@ -154,7 +179,10 @@ public class LinkedList {
 
        // head = deleteKthNode(head,18);
 
-        head = insertAtFirst(head,79);
+//        head = insertAtFirst(head,79);
+//        transverse(head);
+
+        head = insertAtKthNode(head,3,69);
         transverse(head);
 
     }
