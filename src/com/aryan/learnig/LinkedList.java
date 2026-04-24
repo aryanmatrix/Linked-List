@@ -1,6 +1,9 @@
 package com.aryan.learnig;
 
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 class Node{
     int data;
     Node next;
@@ -13,6 +16,65 @@ class Node{
 
 public class LinkedList {
 
+     public static Node mergeTwoSortedLL(Node x, Node y){
+
+//         ArrayList<Integer> list = new ArrayList<>();
+//
+//         while(x != null){
+//             list.add(x.data);
+//             x = x.next;
+//         }
+//         while( y != null){
+//             list.add(y.data);
+//             y = y.next;
+//         }
+//         Collections.sort(list);
+//
+//         Node dummy =  new Node(-1);
+//         Node temp = dummy;
+//
+//
+//         Node nn = new Node(list.get(0));
+//         dummy.next = nn;
+//         temp = temp.next;
+//
+//         for(int i=1; i<list.size(); i++){
+//             Node new_node = new Node(list.get(i));
+//             temp.next = new_node;
+//             temp = temp.next;
+//         }
+//         return dummy.next;
+
+
+         Node dummy = new Node(-1);
+         Node temp = dummy;
+
+         while(x != null && y!=null){
+
+             if(x.data <= y.data){
+                 temp.next = x;
+                 x = x.next;
+             }
+             else {
+                 temp.next =y;
+                 y =y.next;
+             }
+
+             temp = temp.next;
+         }
+
+         if(x!=null){
+             temp.next = x;
+
+         }
+         if(y!=null){
+             temp.next = y;
+
+         }
+
+         return dummy.next;
+     }
+
     public static   Node insertAtFirst(Node head ,int val){
 
         Node new_Node = new Node(val);
@@ -24,6 +86,31 @@ public class LinkedList {
         new_Node.next = head;
 
         head = new_Node;
+
+        return head;
+    }
+
+    public static Node insertAtKthNode(Node head , int k, int val){
+
+        Node new_Node = new Node(val);
+
+        if (k <= 0) {
+            System.out.println("Invalid position");
+            return head;
+        }
+        if (k == 1) {
+            new_Node.next = head;
+            return new_Node;
+        }
+        Node temp = head;
+        for(int i=1; i<k-1  && temp != null; i++){
+          temp = temp.next;
+        }
+
+        if (temp == null) return head;
+
+        new_Node.next = temp.next;
+        temp.next =new_Node;
 
         return head;
     }
@@ -134,12 +221,18 @@ public class LinkedList {
 //        System.out.println(p.data);
 //        System.out.println(p.next);
 
-        int[] arr = {8,5,4,24,89,6,4,67,8};
+        int[] arr = {1,3,5,9};
 
         Node head = convertArrayToLL(arr);
+
+        int[] arr1 = {1,2,4,10};
+        Node head1 = convertArrayToLL(arr1);
+
+       Node merge = mergeTwoSortedLL(head,head1);
 //        System.out.println(head.data);
 //        System.out.println(head.next.data);
-        transverse(head);
+       // transverse(head);
+        transverse(merge);
 
         int c = countTotalNodes(head);
         System.out.println(c);
@@ -154,7 +247,10 @@ public class LinkedList {
 
        // head = deleteKthNode(head,18);
 
-        head = insertAtFirst(head,79);
+//        head = insertAtFirst(head,79);
+//        transverse(head);
+
+        head = insertAtKthNode(head,3,69);
         transverse(head);
 
     }
